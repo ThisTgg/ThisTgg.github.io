@@ -88,19 +88,19 @@
 
 
 <meta name="description" content="今天在CSDN论坛上看到有人提到Unity5的诸多“罪状”，其中一条就是打出来的空包竟然有17mb，而之前的版本是9mb。我很好奇，难道是IL2Cpp搞的鬼？
-因为好奇，我特意打了一个空包试验了下。其实原因很简单，因为考虑到兼容性Unity5默认情况下同时打了armv7a和x86的动态库。于是空包的大小就增加了几乎一倍。如截图所示，在PlayerSetting中把Device Filter中的FA">
+因为好奇，我特意打了一个空包试验了下。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="为什么Unity5打的空包有17mb?">
 <meta property="og:url" content="http://yoursite.com/2017/03/23/为什么Unity5打的空包有17mb/index.html">
 <meta property="og:site_name" content="嘿嘻随笔">
 <meta property="og:description" content="今天在CSDN论坛上看到有人提到Unity5的诸多“罪状”，其中一条就是打出来的空包竟然有17mb，而之前的版本是9mb。我很好奇，难道是IL2Cpp搞的鬼？
-因为好奇，我特意打了一个空包试验了下。其实原因很简单，因为考虑到兼容性Unity5默认情况下同时打了armv7a和x86的动态库。于是空包的大小就增加了几乎一倍。如截图所示，在PlayerSetting中把Device Filter中的FA">
+因为好奇，我特意打了一个空包试验了下。">
 <meta property="og:image" content="http://yoursite.com/2017/03/23/为什么Unity5打的空包有17mb/20170323223313.png">
-<meta property="og:updated_time" content="2017-03-23T14:40:40.602Z">
+<meta property="og:updated_time" content="2017-03-23T15:32:43.224Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="为什么Unity5打的空包有17mb?">
 <meta name="twitter:description" content="今天在CSDN论坛上看到有人提到Unity5的诸多“罪状”，其中一条就是打出来的空包竟然有17mb，而之前的版本是9mb。我很好奇，难道是IL2Cpp搞的鬼？
-因为好奇，我特意打了一个空包试验了下。其实原因很简单，因为考虑到兼容性Unity5默认情况下同时打了armv7a和x86的动态库。于是空包的大小就增加了几乎一倍。如截图所示，在PlayerSetting中把Device Filter中的FA">
+因为好奇，我特意打了一个空包试验了下。">
 <meta name="twitter:image" content="http://yoursite.com/2017/03/23/为什么Unity5打的空包有17mb/20170323223313.png">
 
 
@@ -369,7 +369,7 @@
 
       
         <p>今天在CSDN论坛上看到有人提到Unity5的诸多“罪状”，其中一条就是打出来的空包竟然有17mb，而之前的版本是9mb。我很好奇，难道是IL2Cpp搞的鬼？</p>
-<p>因为好奇，我特意打了一个空包试验了下。其实原因很简单，因为考虑到兼容性Unity5默认情况下同时打了armv7a和x86的动态库。于是空包的大小就增加了几乎一倍。<br><img src="/2017/03/23/为什么Unity5打的空包有17mb/20170323223313.png" alt="">如截图所示，在PlayerSetting中把Device Filter中的FAT修改为ARMv7就可以了。</p>
+<p>因为好奇，我特意打了一个空包试验了下。<br><a id="more"></a><br>其实原因很简单，因为考虑到兼容性Unity5默认情况下同时打了armv7a和x86的动态库。于是空包的大小就增加了几乎一倍。<br><img src="/2017/03/23/为什么Unity5打的空包有17mb/20170323223313.png" alt="">如截图所示，在PlayerSetting中把Device Filter中的FAT修改为ARMv7就可以了。</p>
 <p>一般情况下android平台不需要编译x86的版本，因为设备太少了，需要考虑对应平台的时候可以单独打一个x86版本的包。除非不考虑apk的包大小的时候，才会选择FAT兼顾兼容性。</p>
 <p>最后额外牢骚一下，不用心的程序员只会看到xxx不行，有xxx问题（水平差的根本连问题都看不出来），而稍微用一点心就可以“知其然而又知其所以然”。这个其实一点技术含量都没有，打个空包看看哪里比较大，很容易知道问题所在，用心而已。</p>
 
