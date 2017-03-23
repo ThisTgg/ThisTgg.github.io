@@ -336,21 +336,16 @@
 
       
         
-          
-            <p><img src="/2017/03/23/Hexo-Admin博客后端管理工具/6177e8b1jw1fb9u0nm8gxj20vk0hcwgr.jpg" alt=""></p>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>这款插件的安装非常简单。通过简单的npm就可以一键安装了，进入搭建好的博客目录。启动CMD执行安装指令，启动hexo的server后进入 localhost:4000/admin/ 就可以在本进行文章的管理和发布了。</p>
-<pre><code>npm install --save hexo-admin
-hexo s -debug
-</code></pre><h3 id="文章管理窗口"><a href="#文章管理窗口" class="headerlink" title="文章管理窗口"></a>文章管理窗口</h3><p>通过这款插件，可以很方便地管理所有的文章。可能会有人问，这样子和简书之类的博客不就相同了吗。哈哈，管理上更像了，但是也更方便了。但是毕竟喜欢折腾，自己的博客想怎么折腾就可以怎么折腾。但是其他线上的博客就不太行啦。<br><img src="/2017/03/23/Hexo-Admin博客后端管理工具/20170323113035.png" alt=""></p>
-<h3 id="文章编辑窗口"><a href="#文章编辑窗口" class="headerlink" title="文章编辑窗口"></a>文章编辑窗口</h3><p>文章的编辑窗口是类似Mou的双栏，书写和预览效果。从尝试过的角度，感觉写文章这样子的效果，会比typora的即时预览的效果好一点。因为typora即时预览的功能，可能和hexo解析出来的不太一样。自从上大学以来，自己可以写东西一般都喜欢用markdown和latex，所以写出原生的markdown语言也比较容易啦。(可能表格类型的会难写一点，但是也是有方法的),配合上博客的Mathjax.js，数学公式也不是问题了。感觉大大降低了写东西的成本，实在不喜欢去调word的格式。但是markdown图片位置会来的难调一点，但是自己写博客也就无所谓啦，一般就不并排图片了。<br><img src="/2017/03/23/Hexo-Admin博客后端管理工具/20170323113239.png" alt=""></p>
-<h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><p>其实我是边写这篇博客，边了解这个插件的功能的。也发现很多的优点。</p>
-<h3 id="即时保存"><a href="#即时保存" class="headerlink" title="即时保存"></a>即时保存</h3><p>在网页上直接写博客，不用进行额外的保存。这款插件每隔几秒钟就会自动保存一次。再也不用怕忘记保存啦，但是习惯了常常默认按cmd+s来保存，变成了保存网页，哈哈。</p>
-<p>通过下面的目录架构可以发现，hexo-admin在原先hexo的基础上加入了draft和discarded来保存我们的草稿和删除的markdown。不用怕误删，也不用怕自己没写好的草稿，不小心就发布出去了。<br><img src="/2017/03/23/Hexo-Admin博客后端管理工具/20170323113447.png" alt=""></p>
-<h3 id="即时渲染"><a href="#即时渲染" class="headerlink" title="即时渲染"></a>即时渲染</h3><p>会发现如果你是在修改当前页面的markdown文件，server上也会动态发生效果，就可以发现效果已经变啦。</p>
-<h3 id="一键发布"><a href="#一键发布" class="headerlink" title="一键发布"></a>一键发布</h3><p>发现还可以一键发布，这样子就不用再新开一个命令窗口来执行hexo d啦。<br><img src="/2017/03/23/Hexo-Admin博客后端管理工具/6177e8b1gw1fb9te0n33jj21kw0bzdi2.jpg" alt=""><br>但是在尝试的时候遇到了点小问题，出现<br>Config value “admin.deployCommand” not found的提示。没事在github上是issue找一下，果然就找到的同样的问题和解决方案。题外话，不得不说issue确实是好东西，自己写项目的时候，通过issue来自己报告bug和修复，也是一个很好的工具。<br>解决方法: 注意这里要chmod a+x hexo-delopy.sh 给所有的用户加上写的权限。</p>
-<p>但是，但是，在实际操作过程中发现，其实这个后端并没有渲染成html文件，只是通过hexo sever可以进行访问。如果网站是部署正在自己的服务器上，就可以这样来动态修改了。但是资源的耗费会比较高。由于这里我的博客使用的是git page所以，还是需要再进行 hexo g和hexo d的。</p>
-
-          
+          <p><img src="/2017/03/23/Hexo-Admin博客后端管理工具/6177e8b1jw1fb9u0nm8gxj20vk0hcwgr.jpg" alt=""></p>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近又想重新折腾和整理一下自己的博客，用新版的hexo重建了静态博客。也整理了一下自己混乱的目录。修改了文章了url，中文标题的url实在是太长了。但是在管理过程就发现，自己所使用的typora这款markdown软件，其实语法不全部与hexo所使用的语法相同，所以就会遇到本地所预览的与发布出来的效果其实不一样，每次就只能进入修改-&gt;启动hexo sever-&gt;修改的回圈，进入了一个非常麻烦的过程。觉得静态博客虽然有着轻量，稳定，快速的优点。但是其实是不便于管理和写东西的。每次折腾半天，都想放弃写了。也曾经想自己换个框架，更好地来管理。但是觉得一整套前端和后端做下来，得花太多时间了，最近又忙得不行。</p>
+<p>毕竟hexo发布也已经好几年了，博客的搭建也从当初的复杂，到现在的几乎使用npm 一键就可以搭搭建效果了。索性google了一下，果真已经有造好的轮子了。也就是我接下来要介绍的hexo-admin<br></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/03/23/Hexo-Admin博客后端管理工具/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
