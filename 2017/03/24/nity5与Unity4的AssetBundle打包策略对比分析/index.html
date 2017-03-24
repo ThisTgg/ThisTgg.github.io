@@ -87,21 +87,19 @@
 
 
 
-<meta name="description" content="今天在CSDN论坛上看到有人提到Unity5的诸多“罪状”，其中一条就是打出来的空包竟然有17mb，而之前的版本是9mb。我很好奇，难道是IL2Cpp搞的鬼？
-因为好奇，我特意打了一个空包试验了下。">
+<meta name="description" content="项目开始逐渐迁移到unity5上，原有用4的打包流程在5上依然是work的，基本是不用改代码的，但是5对打包做了一些改进，今天在考虑要不要改一下项目的打包代码，使用5的所谓的“新的方式”，但是仔细研究了一下，发现其实是没太大必要的，5的打包没解决什么根本问题，下面我对4和5的打包策略进行一下对比分析，并说一下我们目前大体的打包方法。
+unity4的打包unity4基本打包全是靠代码操作，代码使用诸">
 <meta property="og:type" content="article">
-<meta property="og:title" content="为什么Unity5打的空包有17mb?">
-<meta property="og:url" content="http://yoursite.com/2017/03/23/为什么Unity5打的空包有17mb/index.html">
+<meta property="og:title" content="Unity5与Unity4的AssetBundle打包策略对比分析">
+<meta property="og:url" content="http://yoursite.com/2017/03/24/nity5与Unity4的AssetBundle打包策略对比分析/index.html">
 <meta property="og:site_name" content="嘿嘻随笔">
-<meta property="og:description" content="今天在CSDN论坛上看到有人提到Unity5的诸多“罪状”，其中一条就是打出来的空包竟然有17mb，而之前的版本是9mb。我很好奇，难道是IL2Cpp搞的鬼？
-因为好奇，我特意打了一个空包试验了下。">
-<meta property="og:image" content="http://yoursite.com/2017/03/23/为什么Unity5打的空包有17mb/20170323223313.png">
-<meta property="og:updated_time" content="2017-03-23T15:32:43.224Z">
+<meta property="og:description" content="项目开始逐渐迁移到unity5上，原有用4的打包流程在5上依然是work的，基本是不用改代码的，但是5对打包做了一些改进，今天在考虑要不要改一下项目的打包代码，使用5的所谓的“新的方式”，但是仔细研究了一下，发现其实是没太大必要的，5的打包没解决什么根本问题，下面我对4和5的打包策略进行一下对比分析，并说一下我们目前大体的打包方法。
+unity4的打包unity4基本打包全是靠代码操作，代码使用诸">
+<meta property="og:updated_time" content="2017-03-24T01:51:53.321Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="为什么Unity5打的空包有17mb?">
-<meta name="twitter:description" content="今天在CSDN论坛上看到有人提到Unity5的诸多“罪状”，其中一条就是打出来的空包竟然有17mb，而之前的版本是9mb。我很好奇，难道是IL2Cpp搞的鬼？
-因为好奇，我特意打了一个空包试验了下。">
-<meta name="twitter:image" content="http://yoursite.com/2017/03/23/为什么Unity5打的空包有17mb/20170323223313.png">
+<meta name="twitter:title" content="Unity5与Unity4的AssetBundle打包策略对比分析">
+<meta name="twitter:description" content="项目开始逐渐迁移到unity5上，原有用4的打包流程在5上依然是work的，基本是不用改代码的，但是5对打包做了一些改进，今天在考虑要不要改一下项目的打包代码，使用5的所谓的“新的方式”，但是仔细研究了一下，发现其实是没太大必要的，5的打包没解决什么根本问题，下面我对4和5的打包策略进行一下对比分析，并说一下我们目前大体的打包方法。
+unity4的打包unity4基本打包全是靠代码操作，代码使用诸">
 
 
 
@@ -129,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/03/23/为什么Unity5打的空包有17mb/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/03/24/nity5与Unity4的AssetBundle打包策略对比分析/"/>
 
 
 
 
 
-  <title> 为什么Unity5打的空包有17mb? | 嘿嘻随笔 </title>
+  <title> Unity5与Unity4的AssetBundle打包策略对比分析 | 嘿嘻随笔 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -274,7 +272,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/23/为什么Unity5打的空包有17mb/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/24/nity5与Unity4的AssetBundle打包策略对比分析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="嘿嘻">
@@ -295,7 +293,7 @@
             
             
               
-                为什么Unity5打的空包有17mb?
+                Unity5与Unity4的AssetBundle打包策略对比分析
               
             
           </h1>
@@ -310,8 +308,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-23T22:31:00+08:00">
-                2017-03-23
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-24T09:41:00+08:00">
+                2017-03-24
               </time>
             
 
@@ -368,10 +366,23 @@
       
 
       
-        <p>今天在CSDN论坛上看到有人提到Unity5的诸多“罪状”，其中一条就是打出来的空包竟然有17mb，而之前的版本是9mb。我很好奇，难道是IL2Cpp搞的鬼？</p>
-<p>因为好奇，我特意打了一个空包试验了下。<br><a id="more"></a><br>其实原因很简单，因为考虑到兼容性Unity5默认情况下同时打了armv7a和x86的动态库。于是空包的大小就增加了几乎一倍。<br><img src="/2017/03/23/为什么Unity5打的空包有17mb/20170323223313.png" alt="">如截图所示，在PlayerSetting中把Device Filter中的FAT修改为ARMv7就可以了。</p>
-<p>一般情况下android平台不需要编译x86的版本，因为设备太少了，需要考虑对应平台的时候可以单独打一个x86版本的包。除非不考虑apk的包大小的时候，才会选择FAT兼顾兼容性。</p>
-<p>最后额外牢骚一下，不用心的程序员只会看到xxx不行，有xxx问题（水平差的根本连问题都看不出来），而稍微用一点心就可以“知其然而又知其所以然”。这个其实一点技术含量都没有，打个空包看看哪里比较大，很容易知道问题所在，用心而已。</p>
+        <p>项目开始逐渐迁移到unity5上，原有用4的打包流程在5上依然是work的，基本是不用改代码的，但是5对打包做了一些改进，今天在考虑要不要改一下项目的打包代码，使用5的所谓的“新的方式”，但是仔细研究了一下，发现其实是没太大必要的，5的打包没解决什么根本问题，下面我对4和5的打包策略进行一下对比分析，并说一下我们目前大体的打包方法。</p>
+<h3 id="unity4的打包"><a href="#unity4的打包" class="headerlink" title="unity4的打包"></a>unity4的打包</h3><p>unity4基本打包全是靠代码操作，代码使用诸如BuildPipeline.BuildAssetBundleExplicitAssetNames这样的函数来制定把某些资源打进一个bundle包，但是复杂的地方在于：</p>
+<ol>
+<li>处理共用的资源，对于共用的资源我们不希望把他打进多个用它的包，例如资源bc共用a，那么我会先用BuildPipeline.PushAssetDependencies()把a放入堆栈，然后打a包，再打b和c，这样打b或c时如果堆栈中已经有了a，那么a的资源不会被打入bc，而是在b和c中建立一个到a的关联，这样我们在加载b时，先加载好a的包，加载b的包就能把b加出来了。但是假设如果这个程序里只有b依赖a，而没有其他任何资源依赖a，我们就完全可以把ab合在一个包里。<br>问题最复杂的地方在于对于一个大型工程，资源成千上万，依赖关系复杂，我们需要确定一个规则，哪些包可以打在一起，哪些要使用依赖，并给一个正确的push pop堆栈的顺序。看到一些项目需要配置表什么的，那个太不智能，我们的方法就是在打包之前遍历所有资源（所有是指除了代码的所有，包括模型 贴图 场景 shader 配表所有偶有）及其依赖关系，然后会生成几颗树（一个树林）的结构，这个结构里，父节点对子节点存在着依赖关系，然后我们会进一步精简这颗树，因为如果不精简就变成每个资源打一个包，会存在太多的包，我们迭代的把单节点的链条合并到其父节点中，并且消除树中的冗余路径，如a-》b-》c同a-》c同时存在时，我们会消除a-》c这个依赖。最终我们得到一个合并了节点的一些树，然后大体按照从树叶到树根的顺序用push pop打包（总的原则就是依赖的包一定要先在栈里，用完还要及时出栈，不然会影响打包速度）</li>
+<li>加快每次打包的速度，对于大型工程，每次打包的资源非常多，如果每次都全部重大，很耗时间，于是我们做了一套增量的打包，每次打包会记住md5，下次打这个资源时会查看他是否改动，对于没改动的资源就不重新打，当然这个是否改动不是只简单的看他的MD5是否改变，可能这次他的依赖关系变了，那么和包的内容也会变，所以还要考虑依赖的改变等情况。</li>
+<li>在线更新，我们需要在每次打包后生成每个版本的所有包的信息，这样才能为用户正确的在线更新新的包下来，基本上会比较用户本地的包和最新服务器上的包的情况，启动游戏前更新到最新</li>
+<li>资源加载，unity的ab包一个最大的缺陷是，对于一个ab包，两次从他解出的资源是两份内存，基于这个缺点，我们在加载资源时要有选择性的cache住一些bundle包，即加载好资源后不能unload，那么那些该cache呢，最完美的方法是实现一套自己的引用计数机制，ab包和资源asset之间一层计数，asset于使用的实例之间一层计数，当没有人使用这个asset时，该asset可以删除，并减少对其依赖的ab包的计数，而当一个ab包没有被任何asset引用时，则unload这个ab包。这样能保证三点：没有任何一个资源会被打到多个包里，没有任何一个资源在运行时是两份内存的，没有任何一个ab包当前是在浪费内存的，它cache着就说明有人在用它。很多团队的资源加载系统是做不到这三点的。</li>
+</ol>
+<p>unity4给我们的工具就只有两个：一个是打包，一个是进出栈。所以我们生成最优化的打包树（上面1），增量打包（上面2）和更新（上面3），资源加载（上面4）都需要我们自己做工作，事实上这个工作量是很大的，而且会有着居多的坑在等待着您。索幸我已经在前面的项目就稳定下来这一套自己的打包系统了。</p>
+<h3 id="unity5的打包"><a href="#unity5的打包" class="headerlink" title="unity5的打包"></a>unity5的打包</h3><p>最近我在想unity5 的新策略是不是可以优化一下我们现有的打包系统，不过还是比较失望。</p>
+<p>unity5的几个最主要的改进是：</p>
+<ol>
+<li>它允许你在编辑器上（当然代码里也行）指定某个资源应该打到某个包里：这个我认为没什么用处，因为及时有这个我们也不能指望策划或美术去制定哪个资源在哪个包里，因为哪个资源在哪个包应该是我们根据打包树算出来的，所有我们还是要根据打包树去在代码里设定资源和包的映射。</li>
+<li>它obsolete了pushpop接口，就是他不需要我们自己在打包时处理进出栈来维护包的依赖关系了，只要告诉它要打哪些包，他自动为你安排最合适的打包顺序：我认为这个是有用的，因为自己处理是很麻烦的，但是我们的打包系统已经自己处理好了。</li>
+<li>它自己加了增量打包，它本地记住了每次打包的一些文件信息，下次打包只打改过的资源：这个是有用的，不过我们也已经自己处理的增量打包，而且这个自己做也并不麻烦。</li>
+</ol>
+<p>所以基于unity5，我们打算在现有基础上做的改进就是，用它的打包替代我们自己用push pop去维护打包顺序，并且用它的增量打包替代我们的增量打包。但是对于那些没有自己的打包系统的团队，这3点改进是微不足道的，因为他们还是要自己处理生成打包树，以及根据打包树去加载资源，这才是最复杂的事情。当然小的团队小游戏不在乎包大小内存就无所谓了，但是对于大型项目无论基于4还是5，完美的资源加载和打包还是需要大量的工作量的。</p>
 
       
     </div>
@@ -414,8 +425,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/23/ity5中灯光烘焙（lightmap）的一些注意事项/" rel="next" title="Unity5中灯光烘焙（lightmap）的一些注意事项">
-                <i class="fa fa-chevron-left"></i> Unity5中灯光烘焙（lightmap）的一些注意事项
+              <a href="/2017/03/23/为什么Unity5打的空包有17mb/" rel="next" title="为什么Unity5打的空包有17mb?">
+                <i class="fa fa-chevron-left"></i> 为什么Unity5打的空包有17mb?
               </a>
             
           </div>
@@ -423,10 +434,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/03/24/nity5与Unity4的AssetBundle打包策略对比分析/" rel="prev" title="Unity5与Unity4的AssetBundle打包策略对比分析">
-                Unity5与Unity4的AssetBundle打包策略对比分析 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -473,8 +480,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.jpg"
@@ -547,6 +563,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#unity4的打包"><span class="nav-number">1.</span> <span class="nav-text">unity4的打包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#unity5的打包"><span class="nav-number">2.</span> <span class="nav-text">unity5的打包</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
