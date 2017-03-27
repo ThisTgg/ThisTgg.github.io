@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo," />
+  <meta name="keywords" content="排序,算法," />
 
 
 
@@ -87,22 +87,46 @@
 
 
 
-<meta name="description" content="前言最近又想重新折腾和整理一下自己的博客，用新版的hexo重建了静态博客。也整理了一下自己混乱的目录。修改了文章了url，中文标题的url实在是太长了。但是在管理过程就发现，自己所使用的typora这款markdown软件，其实语法不全部与hexo所使用的语法相同，所以就会遇到本地所预览的与发布出来的效果其实不一样，每次就只能进入修改-&amp;gt;启动hexo sever-&amp;gt;修改的回圈，进入了">
+<meta name="description" content="直接插入排序(Insertion Sort)的基本思想是：每次将一个待排序的记录，按其关键字大小插入到前面已经排好序的子序列中的适当位置，直到全部记录插入完成为止。
+设数组为a[0…n-1]。
+
+初始时，a[0]自成1个有序区，无序区为a[1..n-1]。令i=1
+
+将a[i]并入当前的有序区a[0…i-1]中形成a[0…i]的有序区间。
+
+i++并重复第二步直到i==n-1。排序完成。
+
+
+下面">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo-Admin博客后端管理工具">
-<meta property="og:url" content="http://yoursite.com/2017/03/23/Hexo-Admin博客后端管理工具/index.html">
+<meta property="og:title" content="排序算法之二 直接插入排序">
+<meta property="og:url" content="http://yoursite.com/2017/03/27/算法之二-直接插入排序/index.html">
 <meta property="og:site_name" content="嘿嘻随笔">
-<meta property="og:description" content="前言最近又想重新折腾和整理一下自己的博客，用新版的hexo重建了静态博客。也整理了一下自己混乱的目录。修改了文章了url，中文标题的url实在是太长了。但是在管理过程就发现，自己所使用的typora这款markdown软件，其实语法不全部与hexo所使用的语法相同，所以就会遇到本地所预览的与发布出来的效果其实不一样，每次就只能进入修改-&amp;gt;启动hexo sever-&amp;gt;修改的回圈，进入了">
-<meta property="og:image" content="http://yoursite.com/2017/03/23/Hexo-Admin博客后端管理工具/6177e8b1jw1fb9u0nm8gxj20vk0hcwgr.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/03/23/Hexo-Admin博客后端管理工具/20170323113035.png">
-<meta property="og:image" content="http://yoursite.com/2017/03/23/Hexo-Admin博客后端管理工具/20170323113239.png">
-<meta property="og:image" content="http://yoursite.com/2017/03/23/Hexo-Admin博客后端管理工具/20170323113447.png">
-<meta property="og:image" content="http://yoursite.com/2017/03/23/Hexo-Admin博客后端管理工具/6177e8b1gw1fb9te0n33jj21kw0bzdi2.jpg">
-<meta property="og:updated_time" content="2017-03-23T14:00:21.535Z">
+<meta property="og:description" content="直接插入排序(Insertion Sort)的基本思想是：每次将一个待排序的记录，按其关键字大小插入到前面已经排好序的子序列中的适当位置，直到全部记录插入完成为止。
+设数组为a[0…n-1]。
+
+初始时，a[0]自成1个有序区，无序区为a[1..n-1]。令i=1
+
+将a[i]并入当前的有序区a[0…i-1]中形成a[0…i]的有序区间。
+
+i++并重复第二步直到i==n-1。排序完成。
+
+
+下面">
+<meta property="og:updated_time" content="2017-03-27T02:17:56.033Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo-Admin博客后端管理工具">
-<meta name="twitter:description" content="前言最近又想重新折腾和整理一下自己的博客，用新版的hexo重建了静态博客。也整理了一下自己混乱的目录。修改了文章了url，中文标题的url实在是太长了。但是在管理过程就发现，自己所使用的typora这款markdown软件，其实语法不全部与hexo所使用的语法相同，所以就会遇到本地所预览的与发布出来的效果其实不一样，每次就只能进入修改-&amp;gt;启动hexo sever-&amp;gt;修改的回圈，进入了">
-<meta name="twitter:image" content="http://yoursite.com/2017/03/23/Hexo-Admin博客后端管理工具/6177e8b1jw1fb9u0nm8gxj20vk0hcwgr.jpg">
+<meta name="twitter:title" content="排序算法之二 直接插入排序">
+<meta name="twitter:description" content="直接插入排序(Insertion Sort)的基本思想是：每次将一个待排序的记录，按其关键字大小插入到前面已经排好序的子序列中的适当位置，直到全部记录插入完成为止。
+设数组为a[0…n-1]。
+
+初始时，a[0]自成1个有序区，无序区为a[1..n-1]。令i=1
+
+将a[i]并入当前的有序区a[0…i-1]中形成a[0…i]的有序区间。
+
+i++并重复第二步直到i==n-1。排序完成。
+
+
+下面">
 
 
 
@@ -130,13 +154,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/03/23/Hexo-Admin博客后端管理工具/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/03/27/算法之二-直接插入排序/"/>
 
 
 
 
 
-  <title> Hexo-Admin博客后端管理工具 | 嘿嘻随笔 </title>
+  <title> 排序算法之二 直接插入排序 | 嘿嘻随笔 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -275,7 +299,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/23/Hexo-Admin博客后端管理工具/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/27/算法之二-直接插入排序/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="嘿嘻">
@@ -296,7 +320,7 @@
             
             
               
-                Hexo-Admin博客后端管理工具
+                排序算法之二 直接插入排序
               
             
           </h1>
@@ -311,8 +335,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-23T11:27:00+08:00">
-                2017-03-23
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-27T09:59:00+08:00">
+                2017-03-27
               </time>
             
 
@@ -334,8 +358,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/博客/" itemprop="url" rel="index">
-                    <span itemprop="name">博客</span>
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
                   </a>
                 </span>
 
@@ -369,20 +393,23 @@
       
 
       
-        <p><img src="/2017/03/23/Hexo-Admin博客后端管理工具/6177e8b1jw1fb9u0nm8gxj20vk0hcwgr.jpg" alt=""></p>
-<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近又想重新折腾和整理一下自己的博客，用新版的hexo重建了静态博客。也整理了一下自己混乱的目录。修改了文章了url，中文标题的url实在是太长了。但是在管理过程就发现，自己所使用的typora这款markdown软件，其实语法不全部与hexo所使用的语法相同，所以就会遇到本地所预览的与发布出来的效果其实不一样，每次就只能进入修改-&gt;启动hexo sever-&gt;修改的回圈，进入了一个非常麻烦的过程。觉得静态博客虽然有着轻量，稳定，快速的优点。但是其实是不便于管理和写东西的。每次折腾半天，都想放弃写了。也曾经想自己换个框架，更好地来管理。但是觉得一整套前端和后端做下来，得花太多时间了，最近又忙得不行。</p>
-<p>毕竟hexo发布也已经好几年了，博客的搭建也从当初的复杂，到现在的几乎使用npm 一键就可以搭搭建效果了。索性google了一下，果真已经有造好的轮子了。也就是我接下来要介绍的hexo-admin<br><a id="more"></a></p>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>这款插件的安装非常简单。通过简单的npm就可以一键安装了，进入搭建好的博客目录。启动CMD执行安装指令，启动hexo的server后进入 localhost:4000/admin/ 就可以在本进行文章的管理和发布了。</p>
-<pre><code>npm install --save hexo-admin
-hexo s -debug
-</code></pre><h3 id="文章管理窗口"><a href="#文章管理窗口" class="headerlink" title="文章管理窗口"></a>文章管理窗口</h3><p>通过这款插件，可以很方便地管理所有的文章。可能会有人问，这样子和简书之类的博客不就相同了吗。哈哈，管理上更像了，但是也更方便了。但是毕竟喜欢折腾，自己的博客想怎么折腾就可以怎么折腾。但是其他线上的博客就不太行啦。<br><img src="/2017/03/23/Hexo-Admin博客后端管理工具/20170323113035.png" alt=""></p>
-<h3 id="文章编辑窗口"><a href="#文章编辑窗口" class="headerlink" title="文章编辑窗口"></a>文章编辑窗口</h3><p>文章的编辑窗口是类似Mou的双栏，书写和预览效果。从尝试过的角度，感觉写文章这样子的效果，会比typora的即时预览的效果好一点。因为typora即时预览的功能，可能和hexo解析出来的不太一样。自从上大学以来，自己可以写东西一般都喜欢用markdown和latex，所以写出原生的markdown语言也比较容易啦。(可能表格类型的会难写一点，但是也是有方法的),配合上博客的Mathjax.js，数学公式也不是问题了。感觉大大降低了写东西的成本，实在不喜欢去调word的格式。但是markdown图片位置会来的难调一点，但是自己写博客也就无所谓啦，一般就不并排图片了。<br><img src="/2017/03/23/Hexo-Admin博客后端管理工具/20170323113239.png" alt=""></p>
-<h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><p>其实我是边写这篇博客，边了解这个插件的功能的。也发现很多的优点。</p>
-<h3 id="即时保存"><a href="#即时保存" class="headerlink" title="即时保存"></a>即时保存</h3><p>在网页上直接写博客，不用进行额外的保存。这款插件每隔几秒钟就会自动保存一次。再也不用怕忘记保存啦，但是习惯了常常默认按cmd+s来保存，变成了保存网页，哈哈。</p>
-<p>通过下面的目录架构可以发现，hexo-admin在原先hexo的基础上加入了draft和discarded来保存我们的草稿和删除的markdown。不用怕误删，也不用怕自己没写好的草稿，不小心就发布出去了。<br><img src="/2017/03/23/Hexo-Admin博客后端管理工具/20170323113447.png" alt=""></p>
-<h3 id="即时渲染"><a href="#即时渲染" class="headerlink" title="即时渲染"></a>即时渲染</h3><p>会发现如果你是在修改当前页面的markdown文件，server上也会动态发生效果，就可以发现效果已经变啦。</p>
-<h3 id="一键发布"><a href="#一键发布" class="headerlink" title="一键发布"></a>一键发布</h3><p>发现还可以一键发布，这样子就不用再新开一个命令窗口来执行hexo d啦。<br><img src="/2017/03/23/Hexo-Admin博客后端管理工具/6177e8b1gw1fb9te0n33jj21kw0bzdi2.jpg" alt=""><br>但是在尝试的时候遇到了点小问题，出现<br>Config value “admin.deployCommand” not found的提示。没事在github上是issue找一下，果然就找到的同样的问题和解决方案。题外话，不得不说issue确实是好东西，自己写项目的时候，通过issue来自己报告bug和修复，也是一个很好的工具。<br>解决方法: 注意这里要chmod a+x hexo-delopy.sh 给所有的用户加上写的权限。</p>
-<p>但是，但是，在实际操作过程中发现，其实这个后端并没有渲染成html文件，只是通过hexo sever可以进行访问。如果网站是部署正在自己的服务器上，就可以这样来动态修改了。但是资源的耗费会比较高。由于这里我的博客使用的是git page所以，还是需要再进行 hexo g和hexo d的。</p>
+        <p>直接插入排序(Insertion Sort)的基本思想是：每次将一个待排序的记录，按其关键字大小插入到前面已经排好序的子序列中的适当位置，直到全部记录插入完成为止。</p>
+<p>设数组为a[0…n-1]。</p>
+<ol>
+<li><p>初始时，a[0]自成1个有序区，无序区为a[1..n-1]。令i=1</p>
+</li>
+<li><p>将a[i]并入当前的有序区a[0…i-1]中形成a[0…i]的有序区间。</p>
+</li>
+<li><p>i++并重复第二步直到i==n-1。排序完成。</p>
+</li>
+</ol>
+<p>下面给出插入排序的三种实现方法：<br><a id="more"></a></p>
+<h4 id="插入排序1"><a href="#插入排序1" class="headerlink" title="插入排序1"></a>插入排序1</h4><p>以下给出严格按照定义书写的代码（由小到大排序）：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">Insertsort1</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> n)</span></span></div><div class="line">&#123;  </div><div class="line">   <span class="keyword">int</span> i, j, k; </div><div class="line">   <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; n; i++)  </div><div class="line">   &#123;  </div><div class="line">      <span class="comment">//为a[i]在前面的a[0...i-1]有序区间中找一个合适的位置  </span></div><div class="line">      <span class="keyword">for</span> (j = i - <span class="number">1</span>; j &gt;= <span class="number">0</span>; j--)  </div><div class="line">         <span class="keyword">if</span> (a[j] &lt; a[i])  </div><div class="line">           <span class="keyword">break</span>;</div><div class="line">         </div><div class="line">      <span class="comment">//如找到了一个合适的位置  </span></div><div class="line">      <span class="keyword">if</span> (j != i - <span class="number">1</span>)  </div><div class="line">      &#123;  </div><div class="line">        <span class="comment">//将比a[i]大的数据向后移  </span></div><div class="line">        <span class="keyword">int</span> temp = a[i];  </div><div class="line">        <span class="keyword">for</span> (k = i - <span class="number">1</span>; k &gt; j; k--)  </div><div class="line">           a[k + <span class="number">1</span>] = a[k];  </div><div class="line">        <span class="comment">//将a[i]放到正确位置上  </span></div><div class="line">        a[k + <span class="number">1</span>] = temp;  </div><div class="line">      &#125;  </div><div class="line">   &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这样的代码太长了，不够清晰。现在进行一下改写，将搜索和数据后移这二个步骤合并。即每次a[i]先和前面一个数据a[i-1]比较，如果a[i] &gt; a[i-1]说明a[0…i]也是有序的，无须调整。否则就令j=i-1,temp=a[i]。然后一边将数据a[j]向后移动一边向前搜索，当有数据a[j]&lt;a[i]时停止并将temp放到a[j + 1]处。</p>
+<h4 id="插入排序2"><a href="#插入排序2" class="headerlink" title="插入排序2"></a>插入排序2</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">Insertsort2</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> n)</span>  </span></div><div class="line">&#123;  </div><div class="line">   <span class="keyword">int</span> i, j;  </div><div class="line">   <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; n; i++)</div><div class="line">   &#123;</div><div class="line">      <span class="keyword">if</span> (a[i] &lt; a[i - <span class="number">1</span>])  </div><div class="line">      &#123;  </div><div class="line">         <span class="keyword">int</span> temp = a[i];  </div><div class="line">         <span class="keyword">for</span> (j = i - <span class="number">1</span>; j &gt;= <span class="number">0</span> &amp;&amp; a[j] &gt; temp; j--)  </div><div class="line">            a[j + <span class="number">1</span>] = a[j];  </div><div class="line">         a[j + <span class="number">1</span>] = temp;  </div><div class="line">      &#125;</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>继续优化，再对将a[j]插入到前面a[0…j-1]的有序区间所用的方法进行改写，用数据交换代替数据后移。如果a[j]前一个数据a[j-1] &gt; a[j]，就交换a[j]和a[j-1]，再j–直到a[j-1] &lt;= a[j]。这样也可以实现将一个新数据新并入到有序区间。</p>
+<h4 id="插入排序3"><a href="#插入排序3" class="headerlink" title="插入排序3"></a>插入排序3</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">Insertsort3</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> n)</span>  </span></div><div class="line">&#123;  </div><div class="line">   <span class="keyword">int</span> i, j;  </div><div class="line">   <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; n; i++)  </div><div class="line">      <span class="keyword">for</span> (j = i - <span class="number">1</span>; j &gt;= <span class="number">0</span> &amp;&amp; a[j] &gt; a[j + <span class="number">1</span>]; j--)  </div><div class="line">         Swap(a[j], a[j + <span class="number">1</span>]);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>是不是非常简洁呢o(∩_∩)o ?</p>
 
       
     </div>
@@ -412,7 +439,9 @@ hexo s -debug
       
         <div class="post-tags">
           
-            <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+            <a href="/tags/排序/" rel="tag"># 排序</a>
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
           
         </div>
       
@@ -425,15 +454,15 @@ hexo s -debug
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/03/26/算法之一-冒泡排序/" rel="next" title="排序算法之一 冒泡排序">
+                <i class="fa fa-chevron-left"></i> 排序算法之一 冒泡排序
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/03/23/ity5中灯光烘焙（lightmap）的一些注意事项/" rel="prev" title="Unity5中灯光烘焙（lightmap）的一些注意事项">
-                Unity5中灯光烘焙（lightmap）的一些注意事项 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -573,7 +602,7 @@ hexo s -debug
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文章管理窗口"><span class="nav-number">3.</span> <span class="nav-text">文章管理窗口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文章编辑窗口"><span class="nav-number">4.</span> <span class="nav-text">文章编辑窗口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#功能"><span class="nav-number">5.</span> <span class="nav-text">功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#即时保存"><span class="nav-number">6.</span> <span class="nav-text">即时保存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#即时渲染"><span class="nav-number">7.</span> <span class="nav-text">即时渲染</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一键发布"><span class="nav-number">8.</span> <span class="nav-text">一键发布</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#插入排序1"><span class="nav-number">1.</span> <span class="nav-text">插入排序1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#插入排序2"><span class="nav-number">2.</span> <span class="nav-text">插入排序2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#插入排序3"><span class="nav-number">3.</span> <span class="nav-text">插入排序3</span></a></li></ol></div>
             
 
           </div>
