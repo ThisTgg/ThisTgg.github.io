@@ -87,16 +87,19 @@
 
 
 
-<meta name="description" content="吉首大学 软件工程专业热爱游戏开发正在找实习中...Email:tian244650842@gmail.com">
+<meta name="description" content="序接上文，本节来讲讲Unity5新的AssetBundle机制中的压缩。你可以不对你的AssetBundles进行压缩，这样虽然文件很大，但是一旦下载好之后访问是最快的。通常都会进行压缩。并且Unity的AssetBundles支持LZMA和LZ4两种格式的压缩。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Unity5新的AssetBundle机制02——压缩">
 <meta property="og:url" content="http://yoursite.com/2017/03/27/Unity5新的AssetBundle机制02——压缩/index.html">
 <meta property="og:site_name" content="嘿嘻随笔">
-<meta property="og:description" content="吉首大学 软件工程专业热爱游戏开发正在找实习中...Email:tian244650842@gmail.com">
-<meta property="og:updated_time" content="2017-03-27T07:46:43.083Z">
+<meta property="og:description" content="序接上文，本节来讲讲Unity5新的AssetBundle机制中的压缩。你可以不对你的AssetBundles进行压缩，这样虽然文件很大，但是一旦下载好之后访问是最快的。通常都会进行压缩。并且Unity的AssetBundles支持LZMA和LZ4两种格式的压缩。">
+<meta property="og:image" content="http://yoursite.com/2017/03/27/Unity5新的AssetBundle机制02——压缩/20170327111347.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/03/27/Unity5新的AssetBundle机制02——压缩/20170327155655.png">
+<meta property="og:updated_time" content="2017-03-27T08:02:35.455Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Unity5新的AssetBundle机制02——压缩">
-<meta name="twitter:description" content="吉首大学 软件工程专业热爱游戏开发正在找实习中...Email:tian244650842@gmail.com">
+<meta name="twitter:description" content="序接上文，本节来讲讲Unity5新的AssetBundle机制中的压缩。你可以不对你的AssetBundles进行压缩，这样虽然文件很大，但是一旦下载好之后访问是最快的。通常都会进行压缩。并且Unity的AssetBundles支持LZMA和LZ4两种格式的压缩。">
+<meta name="twitter:image" content="http://yoursite.com/2017/03/27/Unity5新的AssetBundle机制02——压缩/20170327111347.jpg">
 
 
 
@@ -341,7 +344,17 @@
       
 
       
-        
+        <h2 id="序"><a href="#序" class="headerlink" title="序"></a>序</h2><p><img src="/2017/03/27/Unity5新的AssetBundle机制02——压缩/20170327111347.jpg" alt=""><br>接上文，本节来讲讲Unity5新的AssetBundle机制中的压缩。<br>你可以不对你的AssetBundles进行压缩，这样虽然文件很大，但是一旦下载好之后访问是最快的。<br>通常都会进行压缩。并且Unity的AssetBundles支持LZMA和LZ4两种格式的压缩。<br><a id="more"></a></p>
+<h2 id="LZMA（Ziv–Markov-chain-algorithm）格式。"><a href="#LZMA（Ziv–Markov-chain-algorithm）格式。" class="headerlink" title="LZMA（Ziv–Markov chain algorithm）格式。"></a>LZMA（Ziv–Markov chain algorithm）格式。</h2><p>这是Unity打包成AssetBundle时的默认格式，会将序列化数据压缩成一个LZMA流，使用时需要整体解包。优点是打包后体积小，缺点是解包时间长导致加载时间长。</p>
+<h2 id="LZ4格式"><a href="#LZ4格式" class="headerlink" title="LZ4格式"></a>LZ4格式</h2><p>相较LZMA会生成更大的压缩文件，但优点是使用时不需要整体解压。LZ4是一种基于chunk的算法，加载对象时只有相应的chunk会被解压。该格式需要unity5.3以上的版本，以前的版本并不支持。<br>如果你对使用不同的压缩格式和不同的加载API对内存开销及性能的影响感兴趣，可以参考这张表：<br><img src="/2017/03/27/Unity5新的AssetBundle机制02——压缩/20170327155655.png" alt=""><br>如果你不敢兴趣，那遵循以下规则好了：<br>1.将AssetBundles作为StreamAssets中的内容一同发布。<br>打包AssetBundles时使用BuildAssetBundleOptions.ChunkBasedCompression选项，加载资源时使用AssetBundle.LoadFromFileAsync接口。这样做可以达到数据压缩的效果又能使加载资源的效率如同读取缓存一般。</p>
+<p>2.将AssetBundles作为DLCs下载。<br>打包AssetBundles时使用默认的压缩格式（LZMA），使用<br>LoadFromCacheOrDownload/WebRequest来下载和缓存。这样你将有最大的压缩率。</p>
+<p>3.加密<br>打包AssetBundles时使用BuildAssetBundleOptions.ChunkBasedCompression选项，加载资源时使用LoadFromMemoryAsync接口（这可能是该接口及其同步版本唯一应该使用到的地方）。</p>
+<p>4.自定义压缩<br>打包AssetBundles时使用BuildAssetBundleOptions.UncompressedAssetBundle选项，使用自己的算法压缩，加载资源时用相应算法解压后使用LoadFromFileAsync接口。</p>
+<p>你应该尽量使用异步的接口。</p>
+<hr>
+<p>参考链接：</p>
+<p><a href="http://docs.unity3d.com/Manual/AssetBundleCompression.html" target="_blank" rel="external">http://docs.unity3d.com/Manual/AssetBundleCompression.html</a></p>
+
       
     </div>
 
@@ -386,6 +399,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/27/Unity5新的AssetBundle机制03——下载与使用/" rel="prev" title="Unity5新的AssetBundle机制03——下载与使用">
+                Unity5新的AssetBundle机制03——下载与使用 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -432,8 +449,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.jpg"
@@ -448,7 +474,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -506,6 +532,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#序"><span class="nav-number">1.</span> <span class="nav-text">序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LZMA（Ziv–Markov-chain-algorithm）格式。"><span class="nav-number">2.</span> <span class="nav-text">LZMA（Ziv–Markov chain algorithm）格式。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LZ4格式"><span class="nav-number">3.</span> <span class="nav-text">LZ4格式</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
