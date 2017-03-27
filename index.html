@@ -309,7 +309,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-27T11:11:57+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-27T11:11:00+08:00">
                 2017-03-27
               </time>
             
@@ -319,6 +319,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Unity3D开发/" itemprop="url" rel="index">
+                    <span itemprop="name">Unity3D开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -346,68 +368,15 @@
 
       
         
-          
-            <h2 id="序"><a href="#序" class="headerlink" title="序"></a>序</h2><p><img src="/2017/03/27/Unity5新的AssetBundle机制01——构建/20170327111347.jpg" alt=""><br>Unity在5.x版本中推出了新的AssetBundle管理机制，本文将对此进行介绍并完成简单实践。</p>
-<h2 id="什么是AssetBundles？"><a href="#什么是AssetBundles？" class="headerlink" title="什么是AssetBundles？"></a>什么是AssetBundles？</h2><p>AssetBundles是一堆从你的Unity项目中导出的文件，这些文件以特殊的格式组织，并能够在你的项目中按需加载。AssetBundles通过后缀名支持所有Unity支持的文件类型。如果你想包含一些自定义的二进制数据，可以将使用.bytes作为后缀。Unity在导入时将把此类文件当作一个TextAsset。</p>
-<h2 id="工作流"><a href="#工作流" class="headerlink" title="工作流"></a>工作流</h2><h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><p>开发阶段，开发者将AssetBundles上传至至服务器<br><img src="/2017/03/27/Unity5新的AssetBundle机制01——构建/20170327111731.jpg" alt=""><br>这就有两个阶段</p>
-<ol>
-<li>你需要通过编辑器构建AssetBundles</li>
-<li>上传至服务器</li>
-</ol>
-<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>程序运行阶段，客户端从服务器下载AssetBundles，并按需操作每个AssetBundle中的资源。<br><img src="/2017/03/27/Unity5新的AssetBundle机制01——构建/20170327111918.jpg" alt=""><br>即如下两个阶段</p>
-<ol>
-<li>客户端运行时下载AssetBundles</li>
-<li>从AssetBundles中加载对象</li>
-</ol>
-<h2 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h2><h3 id="构建AssetBundles"><a href="#构建AssetBundles" class="headerlink" title="构建AssetBundles"></a>构建AssetBundles</h3><h4 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h4><p>我们事先准备一些简单的资源：<br>简单的创建两个矩形，两个球形并做成预制体。<br><img src="/2017/03/27/Unity5新的AssetBundle机制01——构建/20170327113143.jpg" alt=""><br>选中一个Cube，在Inspector视口中的下方，有一个预览窗口。在预览窗口中，我们可以新建并指定资源将被打包进的AssetBundle（默认是None，这表示该资源不被打包进任何AssetBundle，而是被打包进主工程本身），如图：<br><img src="/2017/03/27/Unity5新的AssetBundle机制01——构建/20170327113458.jpg" alt=""><br>图中有两个选项框，左边的用于指定AssetBundle的名字，右边的用于指定AssetBundle Variants的名字（后文介绍）。<br><img src="/2017/03/27/Unity5新的AssetBundle机制01——构建/20170327113841.jpg" alt=""><br>我们新建一个名为shape/cube的AssetBundle，将两个Cube资源指定到其中。新建一个名为shape/sphere的AssetBundle，将两个Sphere资源指定其中（对应的meta文件也将被指定到该AssetBundle）。AssetBundle的命名必须小写（即便写成大写也会被转换成小写），并且支持’/‘，这样可以在界面上开辟子目录。如图：<br><img src="/2017/03/27/Unity5新的AssetBundle机制01——构建/20170327150218.jpg" alt=""><br>如果你创建了一些没有指定任何资源的AssetBundle，Remove Unused Names 按钮可以将其全部清除。</p>
-<h4 id="导出AssetBundle"><a href="#导出AssetBundle" class="headerlink" title="导出AssetBundle"></a>导出AssetBundle</h4><p>我们在项目中新建Editor文件夹，并在其中创建一个脚本：</p>
-<p>BuildAssetBundle.cs<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">using UnityEditor;</div><div class="line"></div><div class="line">public class BuildAssetBundle</div><div class="line">&#123;</div><div class="line"></div><div class="line">    [MenuItem(&quot;Assets/Build AssetBundles&quot;)]</div><div class="line">    static void BuildAllAssetBundles()</div><div class="line">    &#123;</div><div class="line">        BuildPipeline.BuildAssetBundles(&quot;Assets/MyAssetBundles&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>这样在菜单栏中，就会创建对应的按钮让我们执行构建操作。如图：<br><img src="/2017/03/27/Unity5新的AssetBundle机制01——构建/20170327152056.jpg" alt=""><br>在点击之前需要在Assets目录下创建MyAssetBundles文件夹。点击之后将弹出一个进度条对话框，完成后就生成了对应的AssetBundles：<br><img src="/2017/03/27/Unity5新的AssetBundle机制01——构建/20170327152623.jpg" alt=""><br>可以看到这些AssetBundles是按照我们此前在编辑器中新建的AssetBundle的目录结构生成的。并且有这相关的以.manifest为后缀的文件。一个manifest文件是描述了对应资源文件的循环冗余码（CRC）和资源依赖（asset dependencies）的文本文件。</p>
-<p>另外，你还会看到在MyAssetBundles文件夹下有一个MyAssetBundles文件和对应的manifest文件。每当构建AssetBundles时，就会创建这两个文件。</p>
-<h4 id="其他工具"><a href="#其他工具" class="headerlink" title="其他工具"></a>其他工具</h4><p>添加下面这个脚本Editor中，可以使你获取所有AssetBundles的名字：</p>
-<p>GetAssetBundleNames.cs:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">using UnityEditor;</div><div class="line">using UnityEngine;</div><div class="line"></div><div class="line">public class GetAssetBundleNames</div><div class="line">&#123;</div><div class="line"></div><div class="line">    [MenuItem(&quot;Assets/Get AssetBundle names&quot;)]</div><div class="line">    static void GetNames()</div><div class="line">    &#123;</div><div class="line">        var names = AssetDatabase.GetAllAssetBundleNames();</div><div class="line">        foreach (var name in names)</div><div class="line">            Debug.Log(&quot;AssetBundle: &quot; + name);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>添加下面这个脚本Editor中，可以使你在改变AssetBundle时得到通知：</p>
-<p>MyPostprocessor.cs:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">using UnityEngine;</div><div class="line">using UnityEditor;</div><div class="line"></div><div class="line">public class MyPostprocessor : AssetPostprocessor</div><div class="line">&#123;</div><div class="line"></div><div class="line">    void OnPostprocessAssetbundleNameChanged(string path,</div><div class="line">            string previous, string next)</div><div class="line">    &#123;</div><div class="line">        Debug.Log(&quot;AB: &quot; + path + &quot; old: &quot; + previous + &quot; new: &quot; + next);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h4 id="AssetBundle-Variants"><a href="#AssetBundle-Variants" class="headerlink" title="AssetBundle Variants"></a>AssetBundle Variants</h4><p>AssetBundle Variants是Unity5的新特性。你可以将两组不同的资源指定为同一个AssetBundle但是指定不同的Variants，这样，你可以根据平台的不同加载不同的资源（例如支持高清资源的设备加载hd的Variants，不支持高清资源的设备加载sd的Variants）。可是使用<a href="https://docs.unity3d.com/ScriptReference/AssetImporter-assetBundleVariant.html" target="_blank" rel="external">AssetImporter.assetBundleVariant</a>设置Variants。</p>
-<h4 id="编码建议"><a href="#编码建议" class="headerlink" title="编码建议"></a>编码建议</h4><h5 id="1-标记AssetBundle"><a href="#1-标记AssetBundle" class="headerlink" title="1.标记AssetBundle"></a>1.标记AssetBundle</h5><p>使用AssetImporter.assetBundleName来设置AssetBundle的名字。</p>
-<h5 id="2-使用函数BuildPipeline-BuildAssetBundles-构建AssetBundle"><a href="#2-使用函数BuildPipeline-BuildAssetBundles-构建AssetBundle" class="headerlink" title="2.使用函数BuildPipeline.BuildAssetBundles()构建AssetBundle"></a>2.使用函数BuildPipeline.BuildAssetBundles()构建AssetBundle</h5><p>函数原型：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">public static AssetBundleManifest BuildAssetBundles(string outputPath,    BuildAssetBundleOptions assetBundleOptions = BuildAssetBundleOptions.None, BuildTarget targetPlatform = BuildTarget.WebPlayer);</div></pre></td></tr></table></figure></p>
-<h5 id="3-操纵Asset-database中的AssetBundle-names接口："><a href="#3-操纵Asset-database中的AssetBundle-names接口：" class="headerlink" title="3.操纵Asset database中的AssetBundle names接口："></a>3.操纵Asset database中的AssetBundle names接口：</h5><p><a href="https://docs.unity3d.com/ScriptReference/AssetDatabase.GetAllAssetBundleNames.html" target="_blank" rel="external">AssetDatabase.GetAllAssetBundleNames()</a></p>
-<p><a href="https://docs.unity3d.com/ScriptReference/AssetDatabase.GetAssetPathsFromAssetBundle.html" target="_blank" rel="external">AssetDatabase.GetAssetPathsFromAssetBundle()</a></p>
-<p><a href="http://docs.unity3d.com/ScriptReference/AssetDatabase.RemoveAssetBundleName.html" target="_blank" rel="external">AssetDatabase.RemoveAssetBundleName()</a></p>
-<p><a href="http://docs.unity3d.com/ScriptReference/AssetDatabase.GetUnusedAssetBundleNames.html" target="_blank" rel="external">AssetDatabase.GetUnusedAssetBundleNames()</a></p>
-<p><a href="https://docs.unity3d.com/ScriptReference/AssetDatabase.RemoveUnusedAssetBundleNames.html" target="_blank" rel="external">AssetDatabase.RemoveUnusedAssetBundleNames()</a></p>
-<p><a href="https://docs.unity3d.com/ScriptReference/AssetPostprocessor.OnPostprocessAssetbundleNameChanged.html" target="_blank" rel="external">AssetPostProcessor.OnPostprocessAssetbundleNameChanged()</a></p>
-<h5 id="4-构建AssetBundle选项（BuildAssetBundleOptions）"><a href="#4-构建AssetBundle选项（BuildAssetBundleOptions）" class="headerlink" title="4.构建AssetBundle选项（BuildAssetBundleOptions）"></a>4.构建AssetBundle选项（BuildAssetBundleOptions）</h5><p>CollectDependencies 和 DeterministicAssetBundle 选项总是启用的。</p>
-<p>CompleteAssets 如果我们总是从assets开始而不是objects，该项将被忽略。它默认是完整的。</p>
-<p>ForceRebuildAssetBundle 即便你没有改变资源，但是通过设置该项你可以强制从新构建资源。</p>
-<p>IngoreTypeTreeChanges 即便你改变了type tree你也可以通过设置该项忽略掉。</p>
-<p>DisableWriteTypeTree 与 IngoreTypeTreeChanges是冲突的，如果你将type tree设置为不启用则无法忽略。</p>
-<h5 id="5-Manifest-file"><a href="#5-Manifest-file" class="headerlink" title="5.Manifest file"></a>5.Manifest file</h5><p>每个AssetBundle都有一个manifest文件，包含如下信息：</p>
-<p>CRC（循环冗余码）<br>资源文件的哈希码。在该AssetBundle中的所有资源有一个单一的哈希码，用于检查增量的构建。</p>
-<p>Type tree哈希码。在该AssetBundle中所有类型有一个单一的哈希码，用于检查增量的构建。</p>
-<p>Class types。该AssetBundle中所有的类类型。当为type tree做增量构建检查时将产生一个新的哈希码。</p>
-<p>Asset names。该AssetBundle中所有明确包含的资源名字。依赖的AssetBundle的名字。依赖于该AssetBundle的其他AssetBundles。<br>manifest文件仅用于检查增量构建，运行时不需要。因此不需要打包进正式发行的游戏中。</p>
-<h5 id="6-Single-manifest-file"><a href="#6-Single-manifest-file" class="headerlink" title="6.Single manifest file"></a>6.Single manifest file</h5><p>一个单一的manifest文件一般包含以下信息：<br>所有的AssetBundles。<br>所有AssetBundles的依赖信息。</p>
-<h5 id="7-Single-manifest-AssetBundle"><a href="#7-Single-manifest-AssetBundle" class="headerlink" title="7.Single manifest AssetBundle"></a>7.Single manifest AssetBundle</h5><p>一个AssetBundleManifest对象有如下APIs：</p>
-<p>GetAllAssetBundles() 返回本次构建的所有AssetBundles名字。</p>
-<p>GetDirectDependencies() 返回直接依赖的AssetBundle名字。</p>
-<p>GetAllDependencies() 返回所有依赖的AssetBundle名字。</p>
-<p>GetAssetBundleHash(string) 返回指定的AssetBundle的哈希码。</p>
-<p>GetAllAssetBundlesWithVariant() 返回所有AssetBundles带Variant的名字。</p>
-<h5 id="8-AssetBundle-加载APIs"><a href="#8-AssetBundle-加载APIs" class="headerlink" title="8.AssetBundle 加载APIs"></a>8.AssetBundle 加载APIs</h5><p>Unity5.x改为如下APIs:</p>
-<p>AssetBundle.GetAllAssetNames() 返回该AssetBundle中的所有资源名。</p>
-<p>AssetBundle.GetAllScenePaths() 如果该AssetBundle是一个场景文件，返回该场景中所有资源的路径。</p>
-<p>AssetBundle.LoadAsset() 从该AssetBundle中加载资源。</p>
-<p>AssetBundle.LoadAllAssets() 从该AssetBundle中加载所有资源。</p>
-<p>AssetBundle.LoadAssetWithSubAssets() 通过名字加载该AssetBundle中的资源及子资源。<br>还有对应的异步接口也有提供。<br>组件类型不在返回了，你可以在加载了GameObject之后从其获取。</p>
-<h5 id="9-Typetrees"><a href="#9-Typetrees" class="headerlink" title="9.Typetrees"></a>9.Typetrees</h5><p>每个AssetBundle中都默认写入了一个typetree。只有Metro（Windows Store Apps）例外，它有不同的序列化方案。</p>
-<hr>
-<p>参考链接：</p>
-<p><a href="http://docs.unity3d.com/Manual/AssetBundlesIntro.html" target="_blank" rel="external">http://docs.unity3d.com/Manual/AssetBundlesIntro.html</a></p>
-<p><a href="http://docs.unity3d.com/Manual/BuildingAssetBundles.html" target="_blank" rel="external">http://docs.unity3d.com/Manual/BuildingAssetBundles.html</a></p>
-<p><a href="http://docs.unity3d.com/ScriptReference/BuildPipeline.BuildAssetBundles.html" target="_blank" rel="external">http://docs.unity3d.com/ScriptReference/BuildPipeline.BuildAssetBundles.html</a></p>
-
-          
+          <h2 id="序"><a href="#序" class="headerlink" title="序"></a>序</h2><p><img src="/2017/03/27/Unity5新的AssetBundle机制01——构建/20170327111347.jpg" alt=""><br>Unity在5.x版本中推出了新的AssetBundle管理机制，本文将对此进行介绍并完成简单实践。</p>
+<h2 id="什么是AssetBundles？"><a href="#什么是AssetBundles？" class="headerlink" title="什么是AssetBundles？"></a>什么是AssetBundles？</h2><p>AssetBundles是一堆从你的Unity项目中导出的文件，这些文件以特殊的格式组织，并能够在你的项目中按需加载。AssetBundles通过后缀名支持所有Unity支持的文件类型。如果你想包含一些自定义的二进制数据，可以将使用.bytes作为后缀。Unity在导入时将把此类文件当作一个TextAsset。<br></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/03/27/Unity5新的AssetBundle机制01——构建/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
