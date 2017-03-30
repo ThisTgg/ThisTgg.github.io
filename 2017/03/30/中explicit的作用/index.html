@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="C++," />
 
 
 
@@ -87,19 +87,16 @@
 
 
 
-<meta name="description" content="最近到读Effective C++，里面提到了explicit关键字，它是用来阻止构造函数被用来执行隐式类型转换。虽然平时中很少使用到这个关键字，但是不难发现C++标准库中的相关类声明中explicit出现的频率是很高的，既然C++语言提供这种特性，我想在有些时候这种特性将会非常有用，下面说说我对explicit的认识。
-C++中explicit关键字，实际上只对构造函数起作用。可以用实例来表示：">
+<meta name="description" content="最近到读Effective C++，里面提到了explicit关键字，它是用来阻止构造函数被用来执行隐式类型转换。虽然平时中很少使用到这个关键字，但是不难发现C++标准库中的相关类声明中explicit出现的频率是很高的，既然C++语言提供这种特性，我想在有些时候这种特性将会非常有用，下面说说我对explicit的认识。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++中explicit的作用">
 <meta property="og:url" content="http://yoursite.com/2017/03/30/中explicit的作用/index.html">
 <meta property="og:site_name" content="嘿嘻随笔">
-<meta property="og:description" content="最近到读Effective C++，里面提到了explicit关键字，它是用来阻止构造函数被用来执行隐式类型转换。虽然平时中很少使用到这个关键字，但是不难发现C++标准库中的相关类声明中explicit出现的频率是很高的，既然C++语言提供这种特性，我想在有些时候这种特性将会非常有用，下面说说我对explicit的认识。
-C++中explicit关键字，实际上只对构造函数起作用。可以用实例来表示：">
-<meta property="og:updated_time" content="2017-03-30T06:37:12.292Z">
+<meta property="og:description" content="最近到读Effective C++，里面提到了explicit关键字，它是用来阻止构造函数被用来执行隐式类型转换。虽然平时中很少使用到这个关键字，但是不难发现C++标准库中的相关类声明中explicit出现的频率是很高的，既然C++语言提供这种特性，我想在有些时候这种特性将会非常有用，下面说说我对explicit的认识。">
+<meta property="og:updated_time" content="2017-03-30T06:39:39.258Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++中explicit的作用">
-<meta name="twitter:description" content="最近到读Effective C++，里面提到了explicit关键字，它是用来阻止构造函数被用来执行隐式类型转换。虽然平时中很少使用到这个关键字，但是不难发现C++标准库中的相关类声明中explicit出现的频率是很高的，既然C++语言提供这种特性，我想在有些时候这种特性将会非常有用，下面说说我对explicit的认识。
-C++中explicit关键字，实际上只对构造函数起作用。可以用实例来表示：">
+<meta name="twitter:description" content="最近到读Effective C++，里面提到了explicit关键字，它是用来阻止构造函数被用来执行隐式类型转换。虽然平时中很少使用到这个关键字，但是不难发现C++标准库中的相关类声明中explicit出现的频率是很高的，既然C++语言提供这种特性，我想在有些时候这种特性将会非常有用，下面说说我对explicit的认识。">
 
 
 
@@ -308,7 +305,7 @@ C++中explicit关键字，实际上只对构造函数起作用。可以用实例
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-30T14:13:56+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-30T14:13:00+08:00">
                 2017-03-30
               </time>
             
@@ -318,6 +315,28 @@ C++中explicit关键字，实际上只对构造函数起作用。可以用实例
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -344,8 +363,7 @@ C++中explicit关键字，实际上只对构造函数起作用。可以用实例
       
 
       
-        <p>最近到读Effective C++，里面提到了explicit关键字，它是用来阻止构造函数被用来执行隐式类型转换。虽然平时中很少使用到这个关键字，但是不难发现C++标准库中的相关类声明中explicit出现的频率是很高的，既然C++语言提供这种特性，我想在有些时候这种特性将会非常有用，下面说说我对explicit的认识。</p>
-<p>C++中explicit关键字，实际上只对构造函数起作用。<br>可以用实例来表示：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">class</span> Example</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">   Example(<span class="keyword">int</span> n)</div><div class="line">   &#123;</div><div class="line">      num = n;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">void</span> <span class="title">Print</span><span class="params">()</span></span></div><div class="line">   &#123;</div><div class="line">      <span class="built_in">cout</span> &lt;&lt; num &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">   &#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">   <span class="keyword">int</span> num;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">int</span> _tmain(<span class="keyword">int</span> argc, _TCHAR* argv[])</div><div class="line">&#123;</div><div class="line">   Example example = <span class="number">10</span>;</div><div class="line">   example.Print();</div><div class="line">   example = <span class="string">'a'</span>;</div><div class="line">   example.Print();</div><div class="line">   system(<span class="string">"pause"</span>);</div><div class="line">   <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+        <p>最近到读Effective C++，里面提到了explicit关键字，它是用来阻止构造函数被用来执行隐式类型转换。虽然平时中很少使用到这个关键字，但是不难发现C++标准库中的相关类声明中explicit出现的频率是很高的，既然C++语言提供这种特性，我想在有些时候这种特性将会非常有用，下面说说我对explicit的认识。<br><a id="more"></a><br>C++中explicit关键字，实际上只对构造函数起作用。<br>可以用实例来表示：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">class</span> Example</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">   Example(<span class="keyword">int</span> n)</div><div class="line">   &#123;</div><div class="line">      num = n;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">void</span> <span class="title">Print</span><span class="params">()</span></span></div><div class="line">   &#123;</div><div class="line">      <span class="built_in">cout</span> &lt;&lt; num &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">   &#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">   <span class="keyword">int</span> num;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">int</span> _tmain(<span class="keyword">int</span> argc, _TCHAR* argv[])</div><div class="line">&#123;</div><div class="line">   Example example = <span class="number">10</span>;</div><div class="line">   example.Print();</div><div class="line">   example = <span class="string">'a'</span>;</div><div class="line">   example.Print();</div><div class="line">   system(<span class="string">"pause"</span>);</div><div class="line">   <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>以上代码输出的结果分别为10 97<br>显然，我们本意是不需要‘a’来初始化的<br>因为这样可能会造成不必要的错误<br>由于是隐式转换，编译器不会报错，所以但出现问题是会很难查找到错误</p>
 <p>这时候explicit就体现出它的作用了，把上面的代码修改一下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">class</span> Example</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">   <span class="function"><span class="keyword">explicit</span> <span class="title">Example</span><span class="params">(<span class="keyword">int</span> n)</span></span></div><div class="line">   &#123;</div><div class="line">      num = n;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">void</span> <span class="title">Print</span><span class="params">()</span></span></div><div class="line">   &#123;</div><div class="line">      <span class="built_in">cout</span> &lt;&lt; num &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">   &#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span>:</div><div class="line">   <span class="keyword">int</span> num;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">int</span> _tmain(<span class="keyword">int</span> argc, _TCHAR* argv[])</div><div class="line">&#123;</div><div class="line">   <span class="comment">//Example example = ‘a'; 这样的隐式转换会报错</span></div><div class="line">   <span class="function">Example <span class="title">example</span><span class="params">(<span class="number">10</span>)</span></span>; <span class="comment">//只能显示调用</span></div><div class="line">   example.Print();</div><div class="line">   system(<span class="string">"pause"</span>);</div><div class="line">   <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>在实际代码中的东西可不像这种故意造出的例子。<br>发生隐式转换，除非有心利用，隐式转换常常带来程序逻辑的错误，而且这种错误一旦发生是很难察觉的。<br>原则上应该在所有的构造函数前加explicit关键字，当你有心利用隐式转换的时候再去解除explicit，这样可以大大减少错误的发生。</p>
@@ -375,6 +393,12 @@ C++中explicit关键字，实际上只对构造函数起作用。可以用实例
     </div>
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag"># C++</a>
+          
+        </div>
       
 
       
@@ -467,7 +491,7 @@ C++中explicit关键字，实际上只对构造函数起作用。可以用实例
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -478,7 +502,7 @@ C++中explicit关键字，实际上只对构造函数起作用。可以用实例
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
